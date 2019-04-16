@@ -1,14 +1,14 @@
-import { Entity, ObjectID, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectID, ObjectIdColumn, Column, BaseEntity } from "typeorm";
 import { Credentials } from "./credentials";
 import { Length, IsDate } from "class-validator";
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
     
     @ObjectIdColumn()
     id: ObjectID;
     
-    @Column({nullable: false})
+    @Column()
     @Length(3, 64)
     firstName: string;
     

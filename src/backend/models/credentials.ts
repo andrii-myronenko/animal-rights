@@ -8,7 +8,6 @@ export class Credentials {
     login: string;
     
     @Column({nullable: false})
-    @Length(3, 64)
     password: string;
 
 }

@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-back": "cd src/backend/ && tsc --skipLibCheck",
-    "run-back": "cd src/backend/dist && node index.js"
+    "run-back": "cd src/backend && ts-node -r tsconfig-paths/register index.ts"
   },
   "repository": {
     "type": "git",
@@ -14,27 +13,38 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/dotenv": "^6.1.1",
+    "@types/graphql": "^14.2.0",
     "@types/http-status-codes": "^1.2.0",
+    "@types/lodash": "^4.14.123",
     "@types/mongoose": "^5.3.26",
     "@types/morgan": "^1.7.35",
+    "apollo-server": "^2.4.8",
     "apollo-server-koa": "^2.4.8",
+    "bcryptjs": "^2.4.3",
     "class-validator": "^0.9.1",
     "dotenv": "^7.0.0",
-    "graphql": "^14.2.1",
+    "graphql": "^14.1.0",
+    "graphql-tools": "^4.0.4",
     "http-status-codes": "^1.3.2",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
+    "lodash": "^4.17.11",
     "microframework": "^0.6.4",
     "mongodb": "^3.2.3",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.1.0",
     "typeorm": "^0.2.16",
+    "typescript": "^3.4.3",
     "utils": "^0.3.1"
   },
   "devDependencies": {
     "@types/koa": "^2.0.48",
-    "@types/koa-router": "^7.0.40"
+    "@types/koa-router": "^7.0.40",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "tsconfig-paths": "^3.8.0"
   }
 }
