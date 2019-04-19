@@ -1,3 +1,5 @@
+import { ValidationError } from "@modules/errors/validation-error"
+
 export abstract class AbstractValidator {
     protected hadnler: AbstractValidator
 
@@ -5,5 +7,5 @@ export abstract class AbstractValidator {
         this.hadnler = handler;
     }
 
-    public abstract validate(value: any): void
+    public abstract validate(value: any): ValidationError | null
 }

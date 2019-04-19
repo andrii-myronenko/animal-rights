@@ -1,26 +1,29 @@
 import { AbstractValidator } from "./abstract-validator"
+import { ValidationError } from "@modules/errors/validation-error"
 
 class LoginValidator extends AbstractValidator {
     public validate(value: any){
         const login = value.login as string;
-        if(login.match(/[^A-Za-z0-9]{3,24}/)){
-            this.hadnler.validate(value)
+        if(!login.match(/[^A-Za-z0-9]+/)){
+            return new ValidationError(`Login has to contain only latin letters and numbers and contain from 3 to 24 symbols`, "login");
         }
-        else{
-            throw new Error(`Login validation error`);
+        if(this.hadnler){
+            return this.hadnler.validate(value)
         }
+        return null;
     }
 }
 
 class PasswordValidator extends AbstractValidator {
     public validate(value: any){
-        const login = value.password as string;
-        if(login.match(/[^A-Za-z0-9]{3,24}/)){
-            this.hadnler.validate(value)
+        const password = value.password as string;
+        if(!password.match(/[^A-Za-z0-9]+/)){
+            return new ValidationError(`Password has to contain only latin letters and numbers and contain from 3 to 24 symbols`, "password");
         }
-        else{
-            throw new Error(`Password validation error`);
+        if(this.hadnler){
+            return this.hadnler.validate(value)
         }
+        return null;
     }
 }
 
@@ -33,8 +36,9 @@ class CredentialsValidator extends AbstractValidator {
 
     public validate(value: any){
         if("login" in value && "password" in value){
-            this.hadnler.validate(value);
+            return this.hadnler.validate(value);
         }
+        return new ValidationError("No required fields in validated object", "login")
     }
 
     constructor(){

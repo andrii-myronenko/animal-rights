@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run-back": "cd src/backend && ts-node -r tsconfig-paths/register index.ts"
+    "run-back": "cd src/backend && ts-node -r tsconfig-paths/register index.ts",
+    "run-back-dev": "cd src/backend && ts-node-dev -r tsconfig-paths/register index.ts"
   },
   "repository": {
     "type": "git",

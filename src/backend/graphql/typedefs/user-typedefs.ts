@@ -1,11 +1,22 @@
 import { gql } from "apollo-server-koa"
 
 export const typeDefs = gql`
-    extend type Query {
-        hello: String!
+    type User {
+        id: ID!
+        firstName: String
+        lastName: String
+        email: String!
+        photoUrl: String
+        dateOfRegistration: Date!
     }
 
-    type Mutation{
-        register(login: String!, password: String!): String
+    extend type Query {
+        me: User
+    }
+
+    type Mutation {
+        register (email: String!, password: String!): String
+        login (email: String!, password: String!): User
     }
 `;
+ 

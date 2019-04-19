@@ -24,5 +24,5 @@ export class User extends BaseEntity {
     @Column({default: Date.now})
     @IsDate()
     dateOfRegistration: Date
-
+    
 }
