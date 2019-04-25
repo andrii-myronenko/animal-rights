@@ -1,10 +1,14 @@
-import Koa from "koa";
 import Router from 'koa-router';
 
 const router = new Router();
 
-router.get('/*', async (ctx: Koa.Context) => {
+router.get('/', async (ctx) => {
     ctx.body = 'Hello World!';
 });
 
-export { router as userRouter }
+// router.post('/graphql', async (ctx, next) => {
+//     console.log(ctx.state);
+//     return next();
+// });
+
+export { router as userRouter };

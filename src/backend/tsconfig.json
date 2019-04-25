@@ -10,12 +10,13 @@
           "../common/ambient-declarations"
       ],
       "paths": {
-          "@routes/*":  [ "routes/*"    ],
-          "@models/*":  [ "models/*"    ],
-          "@modules/*": [ "modules/*"   ],
-          "@graphql/*": [ "graphql/*"   ],
-          "@app/*":     [ "./*"         ],
-          "@common/*":  [ "../common/*" ]
+          "@routes/*":      [ "routes/*"       ],
+          "@models/*":      [ "models/*"       ],
+          "@modules/*":     [ "modules/*"      ],
+          "@graphql/*":     [ "graphql/*"      ],
+          "@app/*":         [ "./*"            ],
+          "@common/*":      [ "../common/*"    ],
+          "@repositories":  [ "repositories/*" ]
       },
       "target":           "es2018",  // es-tspm package currently supports ^es2018
       "lib":              ["esnext"],
@@ -24,7 +25,7 @@
       "sourceMap":      false,
       "declaration":    false, 
       "declarationMap": false, 
-      "esModuleInterop":              true, 
+      "esModuleInterop": true,
       "allowSyntheticDefaultImports": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata":  true,  

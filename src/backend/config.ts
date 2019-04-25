@@ -1,11 +1,11 @@
-import path from "path"
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 
-dotenv.config({path: path.resolve(process.cwd(), "../", ".env")});
+dotenv.config();
 
 const config = {
-    DatabaseUrl: process.env.MONGODB_URI,
-    ServerPort: 5000
+    MongoPort: +process.env.MONGODB_PORT,
+    DatabaseName: process.env.MONGODB_DATABASE,
+    JwtSecret: process.env.JWT_SECRET
 };
 
-export { config }
+export { config };

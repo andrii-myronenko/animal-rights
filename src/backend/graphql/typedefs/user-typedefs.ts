@@ -1,22 +1,32 @@
-import { gql } from "apollo-server-koa"
+import { gql } from "apollo-server-koa";
 
 export const typeDefs = gql`
+    directive @auth(
+        requires: Role = ADMIN,
+    ) on OBJECT | FIELD_DEFINITION
+
+    enum Role {
+        ADMIN
+        USER
+    }
+
     type User {
         id: ID!
         firstName: String
         lastName: String
-        email: String!
+        login: String!
         photoUrl: String
-        dateOfRegistration: Date!
+        dateOfRegistration: String!
+        role: Role!
     }
 
     extend type Query {
-        me: User
+        me: User @auth(requires: USER)
     }
 
     type Mutation {
-        register (email: String!, password: String!): String
-        login (email: String!, password: String!): User
+        register (login: String!, password: String!): User
+        login (login: String!, password: String!): String!
     }
 `;
  
