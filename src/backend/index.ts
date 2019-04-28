@@ -3,11 +3,12 @@ import { createConnection } from "typeorm";
 import { User } from "@models/user";
 import Koa from 'koa';
 import { ApolloServer } from 'apollo-server-koa';
-import { userRouter } from "@routes/user";
+import { userRouter } from "@routes/routes";
 import { schema } from "@graphql/schema";
 import bodyParser from "koa-bodyparser";
-import { config } from "./config";
+import { config, Frontend } from "./config";
 import jwt from "koa-jwt";
+import serve from 'koa-static';
 
 const bootstrap = async () => {
     try{
@@ -18,11 +19,16 @@ const bootstrap = async () => {
             database: config.DatabaseName,
             entities: [User]
         });
+
         console.log("MongoDB is running");
         const server = new ApolloServer({ schema, context: ({ ctx }) => ctx });
         const app = new Koa();
 
         app.use(bodyParser());
+
+        app.use(serve(Frontend.DistDir));
+        app.use(serve(Frontend.AssetsDir));
+
         app.use(jwt({ secret: config.JwtSecret, passthrough: true }));
         app.use(userRouter.routes());
         

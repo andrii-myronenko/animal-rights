@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/frontend/index.scss"],"names":[],"mappings":"AAAA;AACA;AACA;AACA,0BAA0B","file":"bundle.css","sourcesContent":[".simple-css {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis; }\n"],"sourceRoot":""}
