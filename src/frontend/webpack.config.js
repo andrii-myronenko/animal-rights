@@ -7,8 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     entry: {
         bundle: [
-            relativePath('index.tsx'),
-            relativePath('index.scss')
+            relativePath('index.tsx')
         ]
     },
     
@@ -25,15 +24,16 @@ module.exports = {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js",  '.mjs', ".json"],
         alias: { 
-            "@app":        relativePath("."                ),
-            "@common":     relativePath("../common"        ),
-            "@components": relativePath("components"       ),
-            "@router":     relativePath("components/router"),
-            "@reducers":   relativePath("reducers"         ),
-            "@actions":    relativePath("actions"          ),
-            "@theme":      relativePath("theme"            ),
-            "@configs":    relativePath("configs"          ),
-            "@graphql":    relativePath("graphql"          )
+            "@app":        relativePath("."                  ),
+            "@common":     relativePath("../common"          ),
+            "@components": relativePath("components"         ),
+            "@router":     relativePath("components/router"  ),
+            "@partials":   relativePath("components/partials"),
+            "@reducers":   relativePath("reducers"           ),
+            "@actions":    relativePath("actions"            ),
+            "@theme":      relativePath("theme"              ),
+            "@configs":    relativePath("configs"            ),
+            "@graphql":    relativePath("graphql"            )
         },
     },
 
@@ -44,8 +44,6 @@ module.exports = {
                 test: /\.tsx?$/, 
                 loader: `awesome-typescript-loader?configFileName=${relativePath('tsconfig.json')}` 
             },
-
-            
             {
                 type: 'javascript/auto',
                 test: /\.mjs$/,
@@ -67,26 +65,10 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: [
-                    MiniCssExtractPlugin.loader, 
-                    {
-                        loader: 'css-loader',
-                    }, 
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                        plugins: function () {
-                            return [
-                                require('precss'),
-                                require('autoprefixer')
-                            ];
-                        }
-                    }
-                    }, 
-                    {
-                        loader: 'sass-loader'
-                    }
+                  { loader: "style-loader" },
+                  { loader: "css-loader" }
                 ]
             }
         ]
@@ -101,23 +83,6 @@ module.exports = {
             chunkFilename: "[id].css"
         })
     ],
-
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
-    // We want to avoid bundling all of React into the same file, since this 
-    // increases compilation time and browsers will typically be able to cache 
-    // a library if it doesn’t change.
-    // externals: {
-    //     "react": "React",
-    //     "react-dom": "ReactDOM"
-    // }
-    // optimization: {
-    //     splitChunks: {
-    //         chunks: 'all'
-    //     }
-    // }
 };
 
 

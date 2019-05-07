@@ -30,9 +30,10 @@ const bootstrap = async () => {
         app.use(serve(Frontend.AssetsDir));
 
         app.use(jwt({ secret: config.JwtSecret, passthrough: true }));
+
+        server.applyMiddleware({ app });
         app.use(userRouter.routes());
         
-        server.applyMiddleware({ app });
         app.listen(3000, () => console.log(`🚀 Server ready at http://localhost:3000`));
         
     }

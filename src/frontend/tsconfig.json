@@ -17,12 +17,12 @@
             "@configs/*":      [ "configs/*"               ],
             "@modules/*":      [ "modules/*"               ],
             "@theme/*":        [ "theme/*"                 ],
+            "@partials/*":     [ "components/partials/*"   ],
             "@app/*":          [ "./*"                     ],
             "@graphql/*":      [ "graphql/*"               ],
             "*": ["./../common/ambient-declarations/*", "*"]
         },
         "noImplicitAny":   true,
-        //"esmoduleInterop": true,
         "experimentalDecorators":     true,
         "strict":                     true,
         "noUnusedLocals":             true,

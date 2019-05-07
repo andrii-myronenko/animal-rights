@@ -17,8 +17,12 @@ class Footer extends React.Component<Props> {
         const { classes } = this.props;
         return (
             <footer className={classes.footer}>
-                <Typography variant="h6" align="right" gutterBottom>
-                    Powered by 100gram adfsd
+                <Typography 
+                    variant="body1" 
+                    align="right" 
+                    gutterBottom
+                >
+                    Powered by Andrew Myronenko
                 </Typography>
             </footer>
         );
