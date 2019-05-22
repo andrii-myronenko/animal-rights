@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { User } from "@models/user";
+import { Animal } from "@models/animal";
 import Koa from 'koa';
 import { ApolloServer } from 'apollo-server-koa';
 import { userRouter } from "@routes/routes";
@@ -17,7 +18,7 @@ const bootstrap = async () => {
             host: "localhost",
             port: config.MongoPort,
             database: config.DatabaseName,
-            entities: [User]
+            entities: [User, Animal]
         });
 
         console.log("MongoDB is running");

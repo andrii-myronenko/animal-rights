@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import PetsIcon from '@material-ui/icons/Pets';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import { compose } from 'recompose';
+import Button from '@material-ui/core/Button';
 
 const styles = ({ spacing, breakpoints }: Theme) => createStyles({
     logo: {
@@ -23,12 +24,18 @@ const styles = ({ spacing, breakpoints }: Theme) => createStyles({
         marginLeft: spacing.unit * 3,
         marginRight: spacing.unit * 3,
     },
+    logoButton: {
+        textTransform: "none",
+        alignSelf: "stretch",
+        color: "white",
+    }
 });
 
 export interface Props{ }
 
 class Logo extends React.Component<Props & WithStyles<typeof styles> & RouteComponentProps> {
-    handleRedirect = () => {
+    handleRedirect = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
         this.props.history.push("/");
     }
     
@@ -39,16 +46,21 @@ class Logo extends React.Component<Props & WithStyles<typeof styles> & RouteComp
         return (
             <div 
                 className={classes.logo}
-                onClick={this.handleRedirect}
             >
-                <PetsIcon className={classes.icon}  />
-                <Typography 
-                    variant="h6" 
-                    color="inherit"
-                    className={classes.siteName} 
+                <Button 
+                    className={classes.logoButton}
+                    onClick={this.handleRedirect}
                 >
-                    ANIMAL RIGHTS
-                </Typography>
+                    <PetsIcon className={classes.icon}  />
+                    <Typography 
+                        variant="h6" 
+                        color="inherit"
+                        className={classes.siteName} 
+                    >
+                        ANIMAL RIGHTS
+                    </Typography>
+                </Button>
+                
             </div>
         );
     }

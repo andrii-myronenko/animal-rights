@@ -43,11 +43,12 @@ class ProfileButton extends React.Component<Props, State> {
     };
 
     handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
         this.setState({ profileAnchorElement: event.currentTarget });
     }
 
-    handleMenuClose = () => {
-        console.log("close");
+    handleMenuClose = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
         this.setState({ profileAnchorElement: null });
     }
    

@@ -3,14 +3,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from '@theme/index';
 import Header from '@components/partials/common/Header';
-import Router from '@router/root';
-import { SnackbarProvider } from 'notistack';
+import Router from '@components/router/RouterRoot';
 import { withStyles, WithStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Footer from '@components/partials/common/Footer';
-// import { Provider } from 'react-redux';
-// import store from '@configs/configureReduxStore'; 
 import ErrorBoundary from './specials/ErrorBoundary';
-import RouterConfig from '@router/config';
+import RouterConfig from '@components/router/RouterConfig';
+import client from '@graphql/config';
+import { ApolloProvider } from "react-apollo";
+
 
 const styles = ({breakpoints, spacing}: Theme) => createStyles({
     "@global": {
@@ -29,12 +29,6 @@ const styles = ({breakpoints, spacing}: Theme) => createStyles({
             marginTop: `${spacing.unit * 8}px`,
         },
         width: "100%",
-        padding: `${spacing.unit * 2}px ${spacing.unit * 4}px ${spacing.unit * 4}px`,
-        [breakpoints.up('lg')]: {
-            paddingLeft: "20%",
-            paddingRight: "20%"
-        },
-        overflow: "hidden"
     }
 });
 
@@ -46,7 +40,7 @@ class App extends React.Component<Props> {
 
         return (
             <ErrorBoundary>
-                <SnackbarProvider maxSnack={3}>
+                <ApolloProvider client={client}>
                     <MuiThemeProvider theme={theme}>
                         <RouterConfig>
                             <CssBaseline />
@@ -57,7 +51,7 @@ class App extends React.Component<Props> {
                             <Footer />
                         </RouterConfig>
                     </MuiThemeProvider>
-                </SnackbarProvider>
+                </ApolloProvider>
             </ErrorBoundary>
         );
     }

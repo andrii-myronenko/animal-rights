@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
-import ArrowBackIos from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
+import { createStyles, withStyles, WithStyles, Theme } from '@material-ui/core/styles';
+import NavigateBefore from '@material-ui/icons/NavigateBefore';
+import NavigateNext from '@material-ui/icons/NavigateNext';
 import Slide from '@partials/main/Slide';
 
-const styles = () => createStyles({
+const styles = ({breakpoints}: Theme) => createStyles({
     slider: {
         position: "relative",
         margin: "0 auto",
@@ -18,6 +18,9 @@ const styles = () => createStyles({
     arrow: {
         height: "100%",
         width: "100px",
+        [breakpoints.down('xs')]: {
+            width: "50px",
+        },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -39,6 +42,15 @@ const styles = () => createStyles({
         top: 0,
         right: 0,
         color: "white"
+    },
+    arrowIcon: {
+        fontSize: "70px",
+        [breakpoints.down('sm')]: {
+            width: "55px",
+        },
+        [breakpoints.down('xs')]: {
+            width: "40px",
+        },
     }
 });
 
@@ -64,6 +76,10 @@ class Slideshow extends React.Component<Props, State> {
         this.setState({
             intervalHandler: setInterval(() => { this.goToNextSlide(); }, 2500) as any
         });
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalHandler);
     }
   
     goToPrevSlide = () => {
@@ -129,11 +145,11 @@ class Slideshow extends React.Component<Props, State> {
                 </div>
         
                 <div className={`${classes.arrow} ${classes.arrowLeft}`} onClick={this.goToPrevSlide}>
-                    <ArrowBackIos fontSize="large" />
+                    <NavigateBefore className={ classes.arrowIcon } />
                 </div>
 
                 <div className={`${classes.arrow} ${classes.arrowRight}`} onClick={this.goToNextSlide}>
-                    <ArrowForwardIos fontSize="large" />
+                    <NavigateNext className={ classes.arrowIcon } />
                 </div>
             </div>
         );

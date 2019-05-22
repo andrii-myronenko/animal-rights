@@ -33,7 +33,9 @@ const styles = ({ breakpoints, spacing }: Theme) => createStyles({
     }
 });
 
-export interface Props extends WithStyles<typeof styles> { }
+export interface Props extends WithStyles<typeof styles> { 
+
+}
 
 interface State {
     eventsAnchorElement: HTMLElement | null;
@@ -47,23 +49,29 @@ class NavigationItemsList extends React.Component<Props & RouteComponentProps, S
     };
 
     handleEventsMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
         this.setState({ eventsAnchorElement: event.currentTarget, adoptsAnchorElement: null });
     }
 
     handleAdoptsMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
         this.setState({ eventsAnchorElement: null, adoptsAnchorElement: event.currentTarget });
     }
 
-    handleRedirectMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        this.setState({ eventsAnchorElement: null, adoptsAnchorElement: event.currentTarget });
-    }
-
-    handleMenuClose = () => {
+    handleMenuClose = (event: React.MouseEvent<HTMLElement>) => {
+        event.stopPropagation();
         this.setState({ eventsAnchorElement: null, adoptsAnchorElement: null });
     }
 
     handleAboutRedirect = () => {
         this.props.history.push("/about");
+    }
+
+    getRedirectFunction = (link: string) => {
+        return () => {
+            this.setState({ eventsAnchorElement: null, adoptsAnchorElement: null });
+            this.props.history.push(link);
+        };
     }
    
     render() {
@@ -81,9 +89,9 @@ class NavigationItemsList extends React.Component<Props & RouteComponentProps, S
                 open={isEventsMenuOpen}
                 onClose={this.handleMenuClose}
             >
-                <MenuItem onClick={this.handleMenuClose}>About Events</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>Upcoming Events</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>Past Events Gallery</MenuItem>
+                <MenuItem onClick={this.getRedirectFunction("/events")}>About Events</MenuItem>
+                <MenuItem onClick={this.getRedirectFunction("/events/upcoming")}>Upcoming Events</MenuItem>
+                <MenuItem onClick={this.getRedirectFunction("/events/past")}>Past Events Gallery</MenuItem>
             </Menu>
         );
 
@@ -96,9 +104,9 @@ class NavigationItemsList extends React.Component<Props & RouteComponentProps, S
                 open={isAdoptsMenuOpen}
                 onClose={this.handleMenuClose}
             >
-                <MenuItem onClick={this.handleMenuClose}>About Adoption</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>Animals To Adopt</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>Adopted Gallery</MenuItem>
+                <MenuItem onClick={this.getRedirectFunction("/animals")}>About Adoption</MenuItem>
+                <MenuItem onClick={this.getRedirectFunction("/animals/adoption")}>Animals To Adopt</MenuItem>
+                <MenuItem onClick={this.getRedirectFunction("/animals/gallery")}>Adopted Gallery</MenuItem>
             </Menu>
         );
 

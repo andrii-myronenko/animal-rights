@@ -7,6 +7,14 @@ import classNames from 'classnames';
 import MediaCard from "@components/partials/common/MediaCard";
 
 const styles = ({ spacing, breakpoints }: Theme) => createStyles({
+    mainContainer: {
+        overflow: "hidden",
+        padding: `${spacing.unit * 2}px ${spacing.unit * 4}px ${spacing.unit * 4}px`,
+        [breakpoints.up('lg')]: {
+            paddingLeft: "20%",
+            paddingRight: "20%"
+        },
+    },
     imageRight: {
         borderRadius: "5px",
         width: "60%",
@@ -21,12 +29,16 @@ const styles = ({ spacing, breakpoints }: Theme) => createStyles({
             marginBottom: spacing.unit * 0.5
         }
     },
-    container: {
+    floatWithTextContainer: {
         overflow: "hidden"
     },
     cardGrid: {
-        paddingTop: spacing.unit * 6
-    },
+        paddingTop: spacing.unit * 6,
+        [breakpoints.down("xs")]: {
+            paddingLeft: "5%",
+            paddingRight: "5%"
+        }
+    }
 });
 
 const cards = [ 
@@ -34,13 +46,15 @@ const cards = [
         title: "Animals to adopt",
         text: "Animals, which are currently in our shelter",
         image: "/images/animals/animal-in-shelter.jpg",
-        link: "/animals/adopt"
+        link: "/animals/adoption",
+        imageTitle: "Dogs in shelter"
     },
     {
         title: "Adopted gallery",
         text: "Gallery of adopted animals with their new keepers",
         image: "/images/animals/girl-adopted-dog.jpeg",
-        link: "/animals/adopted"
+        link: "/animals/adopted",
+        imageTitle: "A girl with a dog"
     },
 ];
 
@@ -50,9 +64,9 @@ class AnimalsInfoPage extends React.Component<Props> {
     render() {
         const { classes } = this.props;
         return( 
-            <React.Fragment>
+            <main className={classes.mainContainer}>
                 <Breadcrumbs />
-                <div className={classes.container}>
+                <div className={classes.floatWithTextContainer}>
                     <img alt="animals protest" className={classes.imageRight} src={"images/animals/girl-with-dog.jpg"}/>
                     <Typography 
                         variant="h4"
@@ -102,7 +116,7 @@ class AnimalsInfoPage extends React.Component<Props> {
                         ))}
                     </Grid>
                 </div>
-            </React.Fragment>
+            </main>
         );
     }
 }

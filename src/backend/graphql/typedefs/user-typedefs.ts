@@ -24,7 +24,7 @@ export const typeDefs = gql`
         me: User @auth(requires: USER)
     }
 
-    type Mutation {
+    extend type Mutation {
         register (login: String!, password: String!): User
         login (login: String!, password: String!): String!
     }

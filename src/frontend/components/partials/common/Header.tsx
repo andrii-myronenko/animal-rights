@@ -37,9 +37,28 @@ const styles = ({ palette, breakpoints, spacing }: Theme) => createStyles({
 
 export interface Props extends WithStyles<typeof styles> { }
 
+export interface State{
+    isMobileMenuOpen: boolean;
+}
 
 
 class Header extends React.Component<Props> {
+    state: State = {
+        isMobileMenuOpen: false
+    };
+
+    onMobileMenuClick = () => {
+        this.setState((previousState: State) => ({
+            isMobileMenuOpen: !previousState.isMobileMenuOpen
+        }));
+    }
+
+    closeMobileMenu = () => {
+        this.setState({
+            isMobileMenuOpen: false
+        });
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -53,11 +72,11 @@ class Header extends React.Component<Props> {
 
         const mobileNavigtionBar = (
             <Toolbar className={classes.mobileNavigationBar}>
-                <ExpansionPanel className={classes.dropdownMenu}>
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <ExpansionPanel expanded={this.state.isMobileMenuOpen} className={classes.dropdownMenu}>
+                    <ExpansionPanelSummary onClick={this.onMobileMenuClick} expandIcon={<ExpandMoreIcon />}>
                         <Logo />
                     </ExpansionPanelSummary>
-                    <ExpansionPanelDetails className={classes.dropdownMenuItems}>
+                    <ExpansionPanelDetails onClick={this.closeMobileMenu} className={classes.dropdownMenuItems}>
                         <NavigationItemsList />
                         <ProfileButton />
                     </ExpansionPanelDetails>

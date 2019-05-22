@@ -14,6 +14,7 @@ export interface Props {
     card: {
         text: string;
         title: string;
+        imageTitle: string;
         image: string;
         link: string
     };
@@ -42,20 +43,20 @@ class MediaCard extends React.Component<Props & WithStyles<typeof styles> & Rout
 
     render() {
         const { classes, card } = this.props;
-        const {image, title, text} = card;
+        const {image, title, text, imageTitle} = card;
 
         return (
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.cardMedia}
                     image={image}
-                    title="Image title"
+                    title={imageTitle}
                 />
                 <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h4" align="center">
+                    <Typography gutterBottom variant="h4"  align="center">
                         {title}
                     </Typography>
-                    <Typography>
+                    <Typography variant="body1">
                         {text}
                     </Typography>
                 </CardContent>
@@ -69,8 +70,8 @@ class MediaCard extends React.Component<Props & WithStyles<typeof styles> & Rout
     }
 }
 
-export default compose<Props & WithStyles<typeof styles> & RouteComponentProps, {}>(
+export default compose(
     withStyles(styles),
     withRouter
-)(MediaCard) as unknown as React.ComponentClass<Props>;
+)(MediaCard as any) as unknown as React.ComponentClass<Props>;
   

@@ -7,6 +7,14 @@ import classNames from 'classnames';
 import MediaCard from "@components/partials/common/MediaCard";
 
 const styles = ({ spacing, breakpoints }: Theme) => createStyles({
+    mainContainer: {
+        overflow: "hidden",
+        padding: `${spacing.unit * 2}px ${spacing.unit * 4}px ${spacing.unit * 4}px`,
+        [breakpoints.up('lg')]: {
+            paddingLeft: "20%",
+            paddingRight: "20%"
+        },
+    },
     imageLeft: {
         borderRadius: "5px",
         width: "60%",
@@ -21,11 +29,15 @@ const styles = ({ spacing, breakpoints }: Theme) => createStyles({
             marginBottom: spacing.unit * 0.5
         }
     },
-    container: {
+    floatWithTextContainer: {
         overflow: "hidden"
     },
     cardGrid: {
-        paddingTop: spacing.unit * 6
+        paddingTop: spacing.unit * 6,
+        [breakpoints.down("xs")]: {
+            paddingLeft: "5%",
+            paddingRight: "5%"
+        }
     },
 });
 
@@ -34,14 +46,16 @@ const cards = [
         title: "Upcoming events",
         text: "More information about upcoming events",
         image: "/images/events/calendar-pic.jpeg",
-        link: "/events/upcoming"
+        link: "/events/upcoming",
+        imageTitle: "Events calendar"
     },
     {
         title: "Past events",
         text: "Photos of past events of our organisation",
         image: "/images/events/past-meeting.jpg",
-        link: "/events/past"
-    },
+        link: "/events/past",
+        imageTitle: "Meeting in Odessa"
+    }
 ];
 
 export interface Props extends WithStyles<typeof styles> { }
@@ -50,10 +64,15 @@ class About extends React.Component<Props> {
     render() {
         const { classes } = this.props;
         return( 
-            <React.Fragment>
+            <main className={classes.mainContainer}>
                 <Breadcrumbs />
-                <div className={classes.container}>
-                    <img alt="animals protest" className={classes.imageLeft} src={"images/events/meeting.jpg"}/>
+                <div className={classes.floatWithTextContainer}>
+                    <img 
+                        alt="Protest in shevchenko park" 
+                        title="Protest in shevchenko park" 
+                        className={classes.imageLeft} 
+                        src={"images/events/meeting.jpg"}
+                    />
                     <Typography 
                         variant="h4"
                         align="center"
@@ -105,7 +124,7 @@ class About extends React.Component<Props> {
                         ))}
                     </Grid>
                 </div>
-            </React.Fragment>
+            </main>
         );
     }
 }

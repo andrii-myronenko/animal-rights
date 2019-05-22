@@ -1,0 +1,17 @@
+import * as React from "react";
+import { BrowserRouter } from 'react-router-dom';
+import { ScrollContext } from 'react-router-scroll-4';
+
+export default class RouterConfig extends React.Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <ScrollContext>
+                    <React.Fragment>
+                        {this.props.children}
+                    </React.Fragment>
+                </ScrollContext>
+            </BrowserRouter>
+        );
+    }
+}

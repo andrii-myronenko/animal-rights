@@ -6,6 +6,14 @@ import GoogleMapComponent from "@components/partials/about/GoogleMap";
 import { lightGreen } from '@material-ui/core/colors';
 
 const styles = ({ spacing, breakpoints }: Theme) => createStyles({
+    mainContainer: {
+        overflow: "hidden",
+        padding: `${spacing.unit * 2}px ${spacing.unit * 4}px ${spacing.unit * 4}px`,
+        [breakpoints.up('lg')]: {
+            paddingLeft: "20%",
+            paddingRight: "20%"
+        },
+    },
     imageLeftContainer: {
         margin: 0,
         width: "60%",
@@ -28,7 +36,7 @@ const styles = ({ spacing, breakpoints }: Theme) => createStyles({
         borderRadius: "5px 5px 0px 0px",
         width: "100%"
     },
-    container: {
+    floatWithTextContainer: {
         overflow: "hidden"
     },
     mapContainer: {
@@ -41,7 +49,7 @@ const styles = ({ spacing, breakpoints }: Theme) => createStyles({
             maxWidth: "150px",
             height: "150px",
         }
-    }
+    },
 });
 
 const kyivCoordinates = {
@@ -55,9 +63,9 @@ class AboutPage extends React.Component<Props> {
     render() {
         const { classes } = this.props;
         return( 
-            <React.Fragment>
+            <main className={classes.mainContainer}>
                 <Breadcrumbs />
-                <div className={classes.container}>
+                <div className={classes.floatWithTextContainer}>
                     <figure className={classes.imageLeftContainer}>
                         <img alt="animals protest" className={classes.imageLeft} src={"images/about-page/animalrights.jpg"}/>
                         <figcaption><Typography variant="body1">Our banner since 2015</Typography></figcaption>
@@ -125,7 +133,7 @@ class AboutPage extends React.Component<Props> {
                     perspiciatis eos est debitis, ad laboriosam quis in laborum unde, asperiores ab architecto illum 
                     aut iure similique esse.
                 </Typography>
-            </React.Fragment>
+            </main>
         );
     }
 }

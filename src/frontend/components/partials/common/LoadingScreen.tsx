@@ -9,7 +9,8 @@ const styles = ({spacing, palette}: Theme) => createStyles({
     },
     loadingContainer: {
         width: "100%",
-        margin: "0 auto"
+        display: "flex",
+        justifyContent: "center"
     }
 });
 

@@ -3,17 +3,11 @@ import { NavLink } from 'react-router-dom';
 import withBreadcrumbs, { InjectedProps } from 'react-router-breadcrumbs-hoc';
 import { withStyles, WithStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { compose } from 'recompose';
+import Typography from '@material-ui/core/Typography';
+ 
 
-// used code from here: https://www.npmjs.com/package/react-router-breadcrumbs-hoc
- 
-// breadcrumbs can be any type of component or string
-const UserBreadcrumb = () =>
-  <span>Hmmm</span>; // use match param userId to fetch/display user name
- 
-// define some custom breadcrumbs for certain routes (optional)
 const routes = [
-  { path: '/users/:userId', breadcrumb: UserBreadcrumb },
-  { path: '/example', breadcrumb: 'Custom Example' },
+    { path: '/example', breadcrumb: 'Custom Example' },
 ];
 
 const styles = ({ breakpoints, spacing, palette }: Theme) => createStyles({
@@ -33,7 +27,7 @@ const styles = ({ breakpoints, spacing, palette }: Theme) => createStyles({
     },
     breadcrumbLink: {
         textDecoration: "none",
-        color: "white",
+        color: "inherit",
         padding: `${spacing.unit}px`,
         "& :hover": {
             color: palette.secondary.dark
@@ -55,14 +49,16 @@ class Breadcrumbs extends React.Component<Props & InjectedProps> {
         return (
             <React.Fragment>
                  <div className={classes.breadcrumbsContainer}>
-                    {breadcrumbs.map((breadcrumb, index) => (
-                        <span key={breadcrumb.key}>
-                            <NavLink className={classes.breadcrumbLink} to={breadcrumb.props.match.url}>
-                                {breadcrumb}
-                            </NavLink>
-                            {(index < breadcrumbs.length - 1) && <i> / </i>}
-                        </span>
-                    ))}
+                    <Typography color="inherit">
+                        {breadcrumbs.map((breadcrumb, index) => (
+                            <span key={breadcrumb.key}>
+                                <NavLink className={classes.breadcrumbLink} to={breadcrumb.props.match.url}>
+                                    {breadcrumb}
+                                </NavLink>
+                                {(index < breadcrumbs.length - 1) && <i> / </i>}
+                            </span>
+                        ))}
+                    </Typography>
                 </div>
             </React.Fragment>
         );

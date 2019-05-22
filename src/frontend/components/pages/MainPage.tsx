@@ -6,7 +6,15 @@ import Grid from '@material-ui/core/Grid';
 import classNames from 'classnames';
 import MediaCard from "@components/partials/common/MediaCard";
 
-const styles = ({ spacing }: Theme) => createStyles({
+const styles = ({ spacing, breakpoints }: Theme) => createStyles({
+    mainContainer: {
+        overflow: "hidden",
+        padding: `${spacing.unit * 2}px ${spacing.unit * 4}px ${spacing.unit * 4}px`,
+        [breakpoints.up('lg')]: {
+            paddingLeft: "20%",
+            paddingRight: "20%"
+        },
+    },
     textContent: {
         marginTop: spacing.unit * 2,
     },
@@ -17,8 +25,12 @@ const styles = ({ spacing }: Theme) => createStyles({
         marginBottom: spacing.unit
     },
     cardGrid: {
-        paddingTop: spacing.unit * 6
-    },
+        paddingTop: spacing.unit * 6,
+        [breakpoints.down("xs")]: {
+            paddingLeft: "5%",
+            paddingRight: "5%"
+        }
+    }
 });
 
 const cards = [ 
@@ -26,26 +38,29 @@ const cards = [
         title: "About us",
         text: "More information about our organisation",
         image: "/images/main-page-cards/paws.jpg",
-        link: "/about"
+        link: "/about",
+        imageTitle: "Our logo"
     },
     {
         title: "Events",
         text: "Events you can participate in to promote out movement",
         image: "/images/main-page-cards/meeting.jpg",
-        link: "/events"
+        link: "/events",
+        imageTitle: "Meeting in Kyiv"
     },
     {
         title: "Adoption",
         text: "You can help the animals from our shelter to find a new home",
         image: "/images/main-page-cards/girl-and-dog.jpg",
-        link: "/animals"
-    }
+        link: "/animals",
+        imageTitle: "Shepherd and a girl"
+    },
 ];
 
 const slideImages = [
-    'images/slides/slide.jpg',
-    'images/slides/slide1.jpg',
-    'images/slides/slide2.jpg'
+    '/images/slides/slide.jpg',
+    '/images/slides/slide1.jpg',
+    '/images/slides/slide2.jpg'
 ];
 
 export interface Props extends WithStyles<typeof styles> { }
@@ -55,7 +70,7 @@ class MainPage extends React.Component<Props>{
     render() {
         const { classes } = this.props;
         return( 
-            <React.Fragment>
+            <main className={classes.mainContainer}>
                 <Slideshow images={slideImages}/>
                 <div className={classes.textContent}>
                     <Typography 
@@ -77,14 +92,14 @@ class MainPage extends React.Component<Props>{
                     <div className={classNames(classes.cardGrid)}>
                         <Grid container justify="center" spacing={40}>
                             {cards.map((card, index) => (
-                                <Grid item key={index} xs={12} sm={4} md={4} lg={4}>
+                                <Grid item key={index} xs={12} sm={6} md={4} lg={4}>
                                     <MediaCard card={card}/>
                                 </Grid>
                             ))}
                         </Grid>
                     </div>
                 </div>
-            </ React.Fragment>
+            </ main>
         );
     }
 }

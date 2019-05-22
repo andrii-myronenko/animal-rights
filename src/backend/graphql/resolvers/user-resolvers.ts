@@ -6,11 +6,11 @@ import { UserInputError, ApolloError, AuthenticationError } from 'apollo-server'
 import * as jwt from "jsonwebtoken";
 import { config } from "@app/config";
 
-
-interface ICredentials{
+export interface Credentials{
     login: string;
     password: string;
 }
+
 
 export const resolvers: IResolvers = {
     Query: {
@@ -19,7 +19,7 @@ export const resolvers: IResolvers = {
         }
     },
     Mutation: {
-        register: async (_, args: ICredentials) => {
+        register: async (_, args: Credentials) => {
             try{
                 const validationError = credentialsValidator.validate(args);
                 if(validationError){
@@ -36,7 +36,7 @@ export const resolvers: IResolvers = {
                 return new ApolloError(`Internal server error: "${e.message}"`, "INTERNAL_SERVER_ERROR");
             }
         },
-        login: async (_, args: ICredentials) => {
+        login: async (_, args: Credentials) => {
             try{
                 const validationError = credentialsValidator.validate(args);
                 if(validationError){
