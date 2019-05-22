@@ -15,7 +15,7 @@ const bootstrap = async () => {
     try{
         await createConnection({
             type: "mongodb",
-            host: "localhost",
+            host: config.MongoHost,
             port: config.MongoPort,
             database: config.DatabaseName,
             entities: [User, Animal]
