@@ -64,6 +64,7 @@ internal/
 !tests/cases/projects/NodeModulesSearch/**/*
 !tests/baselines/reference/project/nodeModules*/**/*
 .idea
+.env
 yarn.lock
 yarn-error.log
 .parallelperf.*
