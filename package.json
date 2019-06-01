@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run-back": "cd src/backend && ts-node -r tsconfig-paths/register --transpile-only index.ts",
+    "start": "cd src/backend && ts-node -r tsconfig-paths/register --transpile-only index.ts",
     "run-back-dev": "cd src/backend && ts-node-dev -r tsconfig-paths/register index.ts",
     "build-front:prod": "webpack --config src/frontend/webpack.config.js --mode production",
     "build-front": "npm run clean && webpack --config src/frontend/webpack.config.js --mode development --progress",
     "watch:front": "webpack --config src/frontend/webpack.config.js --watch --mode development",
     "dev": "npm-run-all --parallel watch:front run-back-dev",
     "clean": "rm -rf dist",
-    "heroku-postbuild": "npm run build-front:prod && npm run run-back"
+    "heroku-postbuild": "npm run build-front:prod"
   },
   "repository": {
     "type": "git",
