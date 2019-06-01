@@ -4,9 +4,7 @@ import * as Path   from 'path';
 dotenv.config();
 
 const config = {
-    MongoHost: process.env.MONGODB_HOST,
-    MongoPort: +process.env.MONGODB_PORT,
-    DatabaseName: process.env.MONGODB_DATABASE,
+    MongoUri: process.env.MONGODB_URI,
     JwtSecret: process.env.JWT_SECRET
 };
 
