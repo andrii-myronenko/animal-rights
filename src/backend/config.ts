@@ -5,7 +5,8 @@ dotenv.config();
 
 const config = {
     MongoUri: process.env.MONGODB_URI,
-    JwtSecret: process.env.JWT_SECRET
+    JwtSecret: process.env.JWT_SECRET,
+    ServerPort: process.env.PORT
 };
 
 export const Frontend = {

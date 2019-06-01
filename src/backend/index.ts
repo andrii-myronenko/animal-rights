@@ -33,7 +33,7 @@ const bootstrap = async () => {
         server.applyMiddleware({ app });
         app.use(userRouter.routes());
         
-        app.listen(3000, () => console.log(`🚀 Server ready at http://localhost:3000`));
+        app.listen(config.ServerPort, () => console.log(`🚀 Server ready on port ${config.ServerPort}`));
         
     }
     catch(e){
