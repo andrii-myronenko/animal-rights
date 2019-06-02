@@ -3,8 +3,12 @@ import { createStyles, withStyles, WithStyles, Theme } from '@material-ui/core/s
 
 const styles = ({ spacing }: Theme) => createStyles({
     container: {
-        margin: spacing.unit * 3
+        padding: spacing.unit * 2,
+        textAlign: "center"
     },
+    title: {
+        margin: 0
+    }
 });
 
 export interface Props extends WithStyles<typeof styles> {
@@ -15,7 +19,7 @@ class PageNotFound extends React.Component<Props> {
     render() {
         return (
             <div className={this.props.classes.container}>
-                <h1>Page not found</h1>
+                <h1 className={this.props.classes.title}>Page not found</h1>
             </div>
         );
     }  
