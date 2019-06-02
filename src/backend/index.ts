@@ -20,7 +20,12 @@ const bootstrap = async () => {
         });
 
         console.log("MongoDB is running");
-        const server = new ApolloServer({ schema, context: ({ ctx }) => ctx });
+        const server = new ApolloServer({ 
+            schema, 
+            context: ({ ctx }) => ctx,
+            introspection: true,
+            playground: true,
+        });
         const app = new Koa();
 
         app.use(bodyParser());
